@@ -2,16 +2,19 @@ package com.prueba.bean;
 
 import com.prueba.dao.ProductoDao;
 import com.prueba.model.Producto;
+import com.prueba.model.Usuario;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @ViewScoped
 public class ProductoBean {
     Producto producto = new Producto();
     private List<Producto> lstProducto;
-    
+    int permiso;
     public List<Producto> getLstProducto() {
         return lstProducto;
     }
@@ -39,8 +42,9 @@ public class ProductoBean {
         }
     }
     
-        public void listar() throws Exception{
+    public void listar() throws Exception{
         ProductoDao dao;
+        
         try {
             dao = new ProductoDao();
             lstProducto = dao.listar();
@@ -86,6 +90,16 @@ public class ProductoBean {
             throw e;
         }
     }
-
+    
+    public Boolean permiso() throws Exception{
+        permiso = (int) (Math.random() * 2)+1;
+        if(permiso==1){
+            return true;
+        }else{
+            this.listar();
+            return false;
+        }
+        
+    }
 
 }

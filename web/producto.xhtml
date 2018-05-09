@@ -17,12 +17,12 @@
                 <p:outputLabel for="txtValor" value="Valor: "/>
                 <p:inputText id="txtValor" value="#{productoBean.producto.valor}" required="true"/>
                     
-                <p:commandButton value="Registrar" action="#{productoBean.registrar()}" update=":msj"/>
-                <p:commandButton value="Listar" action="#{productoBean.listar()}" update="data"/>
+                <p:commandButton value="Registrar" action="#{productoBean.registrar()}" update=":msj" disabled="#{productoBean.permiso()}"/>
+                <p:commandButton value="Listar" action="#{productoBean.listar()}" update="data" disabled="false"/>
             </h:panelGrid>
             
             
-            <p:dataTable id="data" value="#{productoBean.lstProducto}" var="producto"> 
+            <p:dataTable id="data" value="#{productoBean.lstProducto}" var="producto" > 
                 <p:column headerText="Codigo">
                     <p:outputLabel value="#{producto.codigo}"/>
                 </p:column>
@@ -33,9 +33,9 @@
                     <p:outputLabel value="#{producto.valor}"/>
                 </p:column>
                 <p:column headerText="Modificar">
-                    <p:commandLink value="Modificar" actionListener="#{productoBean.leerId(producto)}" oncomplete="PF('widlDatos').show();" update=":digDatos"/>
+                    <p:commandLink value="Modificar" actionListener="#{productoBean.leerId(producto)}" oncomplete="PF('widlDatos').show();" update=":digDatos" disabled="#{productoBean.permiso()}"/>
                     <p:outputLabel value="  "/>
-                    <p:commandLink value="Eliminar" actionListener="#{productoBean.eliminar(producto)}" update="data"/>
+                    <p:commandLink value="Eliminar" actionListener="#{productoBean.eliminar(producto)}" update="data" disabled="#{productoBean.permiso()}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

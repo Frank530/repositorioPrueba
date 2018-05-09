@@ -2,7 +2,6 @@ package com.prueba.bean;
 
 import com.prueba.dao.UsuarioDao;
 import com.prueba.model.Usuario;
-import static com.sun.faces.facelets.util.Path.context;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -34,7 +33,7 @@ public class UsuarioBean {
             temp = dao.getId(usuario);
             
             if(temp != null){
-                logueado = "producto";
+                logueado = "producto?faces-redirect=true";
             }else{
                 logueado = "";
             }                
@@ -45,6 +44,5 @@ public class UsuarioBean {
         return logueado;
     }
   
-    
     
 }
