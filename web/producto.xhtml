@@ -9,14 +9,19 @@
     <h:body>
         <p:growl id="msj" showDetail="true"/> 
         <h:form id="frm">
-            <p:outputLabel for="txtNombre" value="Nombre: "/>
-            <p:inputText id="txtNombre" value="#{productoBean.producto.nombre}" required="true"/>
             
-            <p:outputLabel for="txtValor" value="Valor: "/>
-            <p:inputText id="txtValor" value="#{productoBean.producto.valor}" required="true"/>
-            <p:commandButton value="Registrar" action="#{productoBean.registrar()}" update=":msj"/>
+            <h:panelGrid columns="2" cellpadding="3">
+                <p:outputLabel for="txtNombre" value="Nombre: "/>
+                <p:inputText id="txtNombre" value="#{productoBean.producto.nombre}" required="true"/>
+
+                <p:outputLabel for="txtValor" value="Valor: "/>
+                <p:inputText id="txtValor" value="#{productoBean.producto.valor}" required="true"/>
+                    
+                <p:commandButton value="Registrar" action="#{productoBean.registrar()}" update=":msj"/>
+                <p:commandButton value="Listar" action="#{productoBean.listar()}" update="data"/>
+            </h:panelGrid>
             
-            <p:commandButton value="Listar" action="#{productoBean.listar()}" update="data"/>
+            
             <p:dataTable id="data" value="#{productoBean.lstProducto}" var="producto"> 
                 <p:column headerText="Codigo">
                     <p:outputLabel value="#{producto.codigo}"/>

@@ -11,9 +11,7 @@ import javax.faces.bean.ViewScoped;
 public class ProductoBean {
     Producto producto = new Producto();
     private List<Producto> lstProducto;
-
     
-
     public List<Producto> getLstProducto() {
         return lstProducto;
     }
