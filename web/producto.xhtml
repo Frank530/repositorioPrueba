@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Productos</title>
+    </h:head>
+    <h:body>
+        <p:growl id="msj" showDetail="true"/> 
+        <h:form id="frm">
+            <p:outputLabel for="txtNombre" value="Nombre: "/>
+            <p:inputText id="txtNombre" value="#{productoBean.producto.nombre}" required="true"/>
+            
+            <p:outputLabel for="txtValor" value="Valor: "/>
+            <p:inputText id="txtValor" value="#{productoBean.producto.valor}" required="true"/>
+            <p:commandButton value="Registrar" action="#{productoBean.registrar()}" update=":msj"/>
+            
+            <p:commandButton value="Listar" action="#{productoBean.listar()}" update="data"/>
+            <p:dataTable id="data" value="#{productoBean.lstProducto}" var="producto"> 
+                <p:column headerText="Codigo">
+                    <p:outputLabel value="#{producto.codigo}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <p:outputLabel value="#{producto.nombre}"/>
+                </p:column>    
+                <p:column headerText="Valor">
+                    <p:outputLabel value="#{producto.valor}"/>
+                </p:column>
+                <p:column headerText="Modificar">
+                    <p:commandLink value="Modificar" actionListener="#{productoBean.leerId(producto)}" oncomplete="PF('widlDatos').show();" update=":digDatos"/>
+                    <p:outputLabel value="  "/>
+                    <p:commandLink value="Eliminar" actionListener="#{productoBean.eliminar(producto)}" update="data"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <p:dialog header="datos" widgetVar="widlDatos" id="digDatos">
+            <h:form>
+                <p:outputLabel for="txtNombre" value="Nombre: "/>
+                <p:inputText id="txtNombre" value="#{productoBean.producto.nombre}" required="true"/>
+
+                <p:outputLabel for="txtValor" value="Valor: "/>
+                <p:inputText id="txtValor" value="#{productoBean.producto.valor}" required="true"/>
+
+                <p:commandButton value="Modificar" actionListener="#{productoBean.modificar()}" oncomplete="PF('widlDatos').hide();" update=":frm:data"/>
+                
+            </h:form>
+        </p:dialog>
+        
+    </h:body>
+</html>
